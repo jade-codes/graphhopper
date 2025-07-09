@@ -10,13 +10,15 @@
     <packaging>pom</packaging>
     <url>https://www.graphhopper.com</url>
     <inceptionYear>2012</inceptionYear>
-    <description>Super pom of GraphHopper, the fast and flexible routing engine</description>
+    <description>Custom GraphHopper project with selected modules</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <graphhopper.version>10.0</graphhopper.version>
 
         <!-- We always had this disabled as it is disabled by default in debian JDK builds, but when we
              switched to another JDK on travis it was enabled implicitly. Our javadocs are not ready for this

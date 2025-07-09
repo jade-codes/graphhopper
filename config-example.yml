@@ -92,7 +92,7 @@ graphhopper:
   #   surface,smoothness,max_width,max_height,max_weight,max_weight_except,hgv,max_axle_load,max_length,
   #   hazmat,hazmat_tunnel,hazmat_water,lanes,osm_way_id,toll,track_type,mtb_rating,hike_rating,horse_rating,
   #   country,curvature,average_slope,max_slope,car_temporal_access,bike_temporal_access,foot_temporal_access
-  graph.encoded_values: car_access, car_average_speed, road_access
+  graph.encoded_values: car_access, car_average_speed, road_access, avgspeed_mo_fr_0700_0900_forward
 
   #### Speed, hybrid and flexible mode ####
 
@@ -230,7 +230,7 @@ server:
   - type: http
     port: 8989
     # for security reasons bind to localhost
-    bind_host: localhost
+    bind_host: 0.0.0.0
     # increase GET request limit - not necessary if /maps UI is not used or used without custom models
     max_request_header_size: 50k
   request_log:

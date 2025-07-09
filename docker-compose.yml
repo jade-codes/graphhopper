@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  graphhopper:
+    image: israelhikingmap/graphhopper:latest
+    container_name: graphhopper
+    volumes:
+      - ./test_file_parsed.pbf:/data/test_file_parsed.pbf
+      - ./config-example.yml:/data/config-example.yml
+      - graphhopper_data:/data/graphhopper
+    environment:
+      - JAVA_OPTS=-Xmx4g
+    entrypoint: /bin/bash
+    command: -c "java -Ddw.graphhopper.datareader.file=/data/test_file_parsed.pbf -Ddw.graphhopper.graph.location=/data/graphhopper -jar *.jar server /data/config-example.yml"
+    ports:
+      - "8989:8989"
+      - "8990:8990"
+volumes:
+  graphhopper_data:
+
