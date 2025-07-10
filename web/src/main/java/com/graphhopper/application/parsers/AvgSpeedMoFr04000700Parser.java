@@ -1,11 +1,11 @@
-package com.graphhopper.routing.util.parsers;
+package com.graphhopper.application.parsers;
 
+import com.graphhopper.application.ev.AvgSpeedMoFr04000700;
 import com.graphhopper.reader.ReaderWay;
 import com.graphhopper.routing.ev.DecimalEncodedValue;
 import com.graphhopper.routing.ev.EdgeIntAccess;
 import com.graphhopper.routing.util.parsers.TagParser;
 import com.graphhopper.storage.IntsRef;
-import com.graphhopper.routing.ev.AvgSpeedMoFr04000700;
 
 public class AvgSpeedMoFr04000700Parser implements TagParser {
     private final DecimalEncodedValue avgSpeedEnc;

@@ -18,23 +18,20 @@
 
 package com.graphhopper.application.cli;
 
-import com.graphhopper.application.GraphHopperServerConfiguration;
-import com.graphhopper.http.GraphHopperManaged;
-import io.dropwizard.core.cli.ConfiguredCommand;
-import io.dropwizard.core.setup.Bootstrap;
-import net.sourceforge.argparse4j.inf.Namespace;
+import com.graphhopper.application.ev.AvgSpeedMoFr04000700;
+import com.graphhopper.application.parsers.AvgSpeedMoFr04000700Parser;
+import com.graphhopper.routing.ev.DefaultImportRegistry;
+import com.graphhopper.routing.ev.ImportUnit;
 
-public class ImportCommand extends ConfiguredCommand<GraphHopperServerConfiguration> {
 
-    public ImportCommand() {
-        super("import", "creates the graphhopper files used for later (faster) starts");
-    }
-
+public class CustomImportRegistry extends DefaultImportRegistry {
     @Override
-    protected void run(Bootstrap<GraphHopperServerConfiguration> bootstrap, Namespace namespace, GraphHopperServerConfiguration configuration) {
-        final GraphHopperManaged graphHopper = new GraphHopperManaged(configuration.getGraphHopperConfiguration());
-        graphHopper.getGraphHopper().setImportRegistry(new CustomImportRegistry());
-        graphHopper.getGraphHopper().importAndClose();
+    public ImportUnit createImportUnit(String name) {
+        if (AvgSpeedMoFr04000700.KEY.equals(name))
+            return ImportUnit.create(name, props -> AvgSpeedMoFr04000700.create(),
+                    (lookup, props) -> new AvgSpeedMoFr04000700Parser(
+                        lookup.getDecimalEncodedValue(AvgSpeedMoFr04000700.KEY))
+            );
+        return super.createImportUnit(name);
     }
-
 }
